@@ -13,16 +13,35 @@ Matrix Matrix::operator+(const Matrix &other){
             
             
         }return temp;
-
-        
     }
-    ///complete with other two cases rows = cols && cols = rows 
+    //if some kind of sum is still possible (same number of elements) returns a sum matrix shaped as the first
+    if(rows == other.cols && cols == other.rows){
+        temp.reAllocate(rows,cols);
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                temp.set(matrix[i][j] + other.matrix[j][i], i, j);
+            }
+        }
+        
+    }//no possible sum formula (unless you "decide" one)
         return temp;
 }
-
+//Assumes a column array
+Matrix Matrix::operator*(Array &other){
+    Matrix temp;
+    if(cols != other.length()) return temp;
+    temp.reAllocate(rows, 1);
+    temp.zero();
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < cols; j++){
+            temp.add(matrix[i][j] * other.ptr()[j], i, j);
+        }
+    }
+}
 Matrix Matrix::operator*(const Matrix& other) {
     Matrix temp;
     if (cols != other.rows) return temp;
+    std::cout << "Matrix crime! check your matrices" << std::endl;
     temp.reAllocate(rows, other.cols);
     temp.zero();
     for (int i = 0; i < rows; i++) {
@@ -153,6 +172,7 @@ void Matrix::compile(){
         }
 }
 void Matrix::show(){
+        std::cout << std::endl;
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
                 std::cout << "Matrix[" << i << "][" << j << "]: " << matrix[i][j] << "\t";

@@ -1,6 +1,6 @@
 #include "Array.h"
 
-//devo capire perchè passando una reference sono in grado di leggere il private ma funziona cosi
+//devo capire perchï¿½ passando una reference sono in grado di leggere il private ma funziona cosi
 
 Array Array::operator+(const Array &other){
             Array temp;
@@ -135,3 +135,7 @@ void Array::show(){
                 std::cout << "Array[" << i << "]: " << array[i] << std::endl;
             }//std::cout << int(exists) << std::endl; //?
         }
+
+float* Array::ptr(){
+    return array;
+}

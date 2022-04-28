@@ -2,6 +2,8 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+#include "Array.h"
+
 
 class Matrix{
     private:
@@ -26,6 +28,7 @@ class Matrix{
         void show();
         void random();
 
-        Matrix operator+(const Matrix &other);
-        Matrix operator*(const Matrix &other);
+        Matrix operator+(const Matrix &other);  //matrix + matrix
+        Matrix operator*(const Matrix &other);  //matrix * matrix
+        Matrix Matrix::operator*(Array &other); //matrix * vector
 };

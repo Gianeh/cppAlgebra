@@ -20,6 +20,7 @@ class Array{
         void reAllocate(int l);
         void compile();
         void show();
+        float* ptr();
 
         //IMPORTANT, OPERATOR TAKES A REFERENCE (or pointer) NOT AN INSTANCE
 

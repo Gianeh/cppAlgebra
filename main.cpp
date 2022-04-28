@@ -4,14 +4,14 @@
 
 int main(){
         
-        Matrix M(3,2);
-        Matrix N(2,4);
+        Matrix M(3,3);
+        Array A(3);
 
         M.compile();
-        N.compile();
+        A.compile();
         M.show();
-        N.show();
-        Matrix L = M * N;
+        A.show();
+        Matrix L = M * A;
         L.show();
 
         
