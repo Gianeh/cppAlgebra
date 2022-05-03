@@ -1,6 +1,6 @@
 #include "Array.h"
 
-//devo capire perch� passando una reference sono in grado di leggere il private ma funziona cosi
+//devo capire perchè passando una reference sono in grado di leggere il private ma funziona cosi
 
 Array Array::operator+(const Array &other){
             Array temp;
@@ -56,7 +56,7 @@ Array::Array(){
             array = nullptr;
 }
 //Default constructor
-Array::Array(int l){
+Array::Array(const int l){
             //array = malloc(l*sizeof(float));      //Doesn't work and is deprecated
             array = new float[l]();
             exists = true;
@@ -72,9 +72,17 @@ Array::~Array(){
 
             }//else std::cout << "Already cleaned at RunTime!" << std::endl;
 
-            
         }
 
+//static
+Array Array::create(){
+    int temp_len;
+    std::cout << "Array length: ";
+    std::cin >> temp_len;
+    std::cout << std::endl;
+    Array temp(temp_len);
+    return temp;
+}
 
 void Array::free(){
             if(exists){

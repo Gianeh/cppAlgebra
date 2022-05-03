@@ -5,14 +5,21 @@
 
 class Array{
     private:
+        
         float* array;
         int len;
         bool exists;
     public:
+        //Constructors / Destructors
         Array(const Array &other);
         Array();
-        Array(int l);
+        Array(const int l);
         ~Array();
+
+        //static methods
+        static Array create();
+
+        //methods
         const int length();
         void set(float temp, int i);
         const float get(int i);

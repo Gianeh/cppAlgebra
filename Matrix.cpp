@@ -26,6 +26,7 @@ Matrix Matrix::operator+(const Matrix &other){
     }//no possible sum formula (unless you "decide" one)
         return temp;
 }
+
 //Assumes a column array
 Matrix Matrix::operator*(Array &other){
     Matrix temp;
@@ -38,6 +39,7 @@ Matrix Matrix::operator*(Array &other){
         }
     }
 }
+
 Matrix Matrix::operator*(const Matrix& other) {
     Matrix temp;
     if (cols != other.rows) return temp;
@@ -54,7 +56,7 @@ Matrix Matrix::operator*(const Matrix& other) {
 
 }
 
-
+//copy constructor
 Matrix::Matrix(const Matrix &other) {
     cols = other.cols;
     rows = other.rows;
@@ -69,9 +71,11 @@ Matrix::Matrix(const Matrix &other) {
         }
     }
 }
+//void constructor
 Matrix::Matrix(){
     matrix = nullptr;
 };
+//default constructor
 Matrix::Matrix(int r, int c){
         exists = true;
         cols = c, rows = r;
@@ -80,7 +84,7 @@ Matrix::Matrix(int r, int c){
             matrix[k] = new float[cols];
         }
 }
-
+//destructor
 Matrix::~Matrix(){
         //std::cout << "\n\nEnd of scope" << std::endl;
         if(exists) {
@@ -91,6 +95,18 @@ Matrix::~Matrix(){
             std::cout << "Done..." << std::endl;
 
        }//else std::cout << "Already cleaned at RunTime!" << std::endl;
+}
+
+//static
+Matrix Matrix::create(){
+    int temp_rows, temp_cols;
+    std::cout << "Matrix rows: ";
+    std::cin >> temp_rows;
+    std::cout << "Matrix cols: ";
+    std::cin >> temp_cols;
+    std::cout << std::endl;
+    Matrix temp(temp_rows, temp_cols);
+    return temp;
 }
 
 void Matrix::zero(){

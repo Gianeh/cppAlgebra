@@ -11,10 +11,16 @@ class Matrix{
         int cols, rows;
         bool exists;
     public:
+        //Constructors / Destructor
         Matrix(const Matrix &other);
         Matrix();
         Matrix(int c, int r);
         ~Matrix();
+
+        //static methods
+        static Matrix create();
+
+        //methods
         void zero();
         void eye();
         int row();
@@ -30,5 +36,5 @@ class Matrix{
 
         Matrix operator+(const Matrix &other);  //matrix + matrix
         Matrix operator*(const Matrix &other);  //matrix * matrix
-        Matrix Matrix::operator*(Array &other); //matrix * vector
+        Matrix operator*(Array &other); //matrix * vector
 };

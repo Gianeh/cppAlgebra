@@ -3,17 +3,21 @@
 #include "Matrix.h"
 
 int main(){
-        
+        /*
         Matrix M(3,3);
         Array A(3);
-
         M.compile();
         A.compile();
         M.show();
         A.show();
         Matrix L = M * A;
         L.show();
+        */
 
+       //asks user to cin size and prints the temporaneus array.length()
+        //std::cout << Array::create().length() << std::endl;
+
+        Matrix M = Matrix::create();
         
         
         //Array A(3);
