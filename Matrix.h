@@ -26,20 +26,23 @@ class Matrix{
         static Matrix create();
 
         //methods
-        void zero();
-        void eye();
-        int row();
-        int col();
-        void set(float temp, int i, int j);
-        void add(float temp, int i, int j);
-        float get(int i, int j);
+        void zero() const;
+        void eye() const;
+        int row() const;
+        int col() const;
+        void set(float temp, int i, int j) const;
+        void add(float temp, int i, int j) const;
+        float get(int i, int j) const;
+        void show() const;
+        void compile() const;
+        void random() const;
+
+        //Only work on Non-Const objects
         void free();
         void reAllocate(int c, int r);
-        void compile();
-        void show();
-        void random();
+        
 
-        Matrix operator+(const Matrix &other);  //matrix + matrix
-        Matrix operator*(const Matrix &other);  //matrix * matrix
+        Matrix operator+(const Matrix &other) const;  //matrix + matrix
+        Matrix operator*(const Matrix &other) const;  //matrix * matrix
         //Matrix operator*(const Array &other); //matrix * vector
 };

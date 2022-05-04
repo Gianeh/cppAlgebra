@@ -24,19 +24,22 @@ class Array{
         static Array create();
 
         //methods
-        const int length();
-        void set(float temp, int i);
-        const float get(int i);
+        const int length() const;
+        void set(float temp, int i) const;
+        const float get(int i) const;
+        void compile() const;
+        void show() const;
+        float* ptr() const;
+
+        //only work on Non-Const objects
         void free();
+       
         void reAllocate(int l);
-        void compile();
-        void show();
-        float* ptr();
 
         //IMPORTANT, OPERATOR TAKES A REFERENCE (or pointer) NOT AN INSTANCE
 
-        Array operator+(const Array &other);
-        Array operator*(const Array &other);
+        Array operator+(const Array &other) const;
+        Array operator*(const Array &other) const;
         //Matrix operator*(const Matrix &other); matrix * array
         Array& operator++();
         Array& operator++(int);

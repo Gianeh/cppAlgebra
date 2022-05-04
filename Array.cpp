@@ -5,7 +5,7 @@ int Array::counter = 0;
 
 //devo capire perchè passando una reference sono in grado di leggere il private ma funziona cosi
 
-Array Array::operator+(const Array &other){
+Array Array::operator+(const Array &other) const{
             Array temp;
             if(len != other.len) return temp;
             temp.reAllocate(len);
@@ -15,7 +15,7 @@ Array Array::operator+(const Array &other){
             return temp;
             
             }
-Array Array::operator*(const Array &other) {
+Array Array::operator*(const Array &other) const{
             Array temp;
             if (len != other.len) return temp;
             temp.reAllocate(len);
@@ -41,22 +41,24 @@ Matrix Array::operator*(const Matrix &other){
 
 }
 */
-Array& Array::operator++() {
+
+//increment operators, only work on Non-Const objects
+Array& Array::operator++(){
             for (int i = 0; i < len; i++) {
                 array[i]++;
             }return *this;
 }
-Array& Array::operator++(int) {
+Array& Array::operator++(int){
             for (int i = 0; i < len; i++) {
                 array[i]++;
             }return *this;
 }
-Array& Array::operator--() {
+Array& Array::operator--(){
             for (int i = 0; i < len; i++) {
                 array[i]--;
             }return *this;
 }
-Array& Array::operator--(int) {
+Array& Array::operator--(int){
             for (int i = 0; i < len; i++) {
                 array[i]--;
             }return *this;
@@ -106,29 +108,14 @@ Array Array::create(){
     return temp;
 }
 
-void Array::free(){
-            if(exists){
-                delete[] array;
-                exists = false;
-                std::cout << "Memory area cleaned!" << std::endl;
-                Array::counter--;
-            }
-            return;
-        }
-// handles new dynamic allocation (change in size)
-void Array::reAllocate(int l){
-            if(exists){
-                free();
-            }
-            len = l;
-            array = new float[len]();
-            exists = true;
-        }
-const int Array::length(){
+
+
+
+const int Array::length() const{
             if(!exists) return 0;
             return len;
         }
-void Array::set(float temp, int i){
+void Array::set(float temp, int i) const{
             if (!(i >= len) && !(i < 0) && exists){
                 array[i] = temp;
                 return;
@@ -140,7 +127,7 @@ void Array::set(float temp, int i){
                 return;
             }
         }
-const float Array::get(int i){
+const float Array::get(int i) const{
             if (!(i >= len) && !(i < 0) && exists){
                 return array[i];
             }else if(!exists){
@@ -151,7 +138,7 @@ const float Array::get(int i){
                 return 0;
             }
         }
-void Array::compile(){
+void Array::compile() const{
 
             for(int i = 0; i < len; i++){
                 float temp;
@@ -161,12 +148,31 @@ void Array::compile(){
                 std::cout << std::endl;
             }
         }
-void Array::show(){
+void Array::show() const{
             for(int i = 0; i < len; i++){
                 std::cout << "Array[" << i << "]: " << array[i] << std::endl;
             }//std::cout << int(exists) << std::endl; //?
         }
-
-float* Array::ptr(){
+float* Array::ptr() const{
     return array;
 }
+
+
+// handles new dynamic allocation (change in size)
+void Array::reAllocate(int l){
+            if(exists){
+                free();
+            }
+            len = l;
+            array = new float[len]();
+            exists = true;
+        }
+void Array::free(){
+            if(exists){
+                delete[] array;
+                exists = false;
+                std::cout << "Memory area cleaned!" << std::endl;
+                Array::counter--;
+            }
+            return;
+        }

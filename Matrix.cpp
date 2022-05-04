@@ -4,7 +4,7 @@
 
 int Matrix::counter = 0;
 
-Matrix Matrix::operator+(const Matrix &other){
+Matrix Matrix::operator+(const Matrix &other) const{
     Matrix temp;
     if(rows == other.rows && cols == other.cols){
         temp.reAllocate(rows,cols);
@@ -45,7 +45,7 @@ Matrix Matrix::operator*(Array &other){
 }
 */
 
-Matrix Matrix::operator*(const Matrix& other) {
+Matrix Matrix::operator*(const Matrix& other) const{
     Matrix temp;
     if (cols != other.rows) return temp;
     std::cout << "Matrix crime! check your matrices" << std::endl;
@@ -115,30 +115,39 @@ Matrix Matrix::create(){
     std::cin >> temp_cols;
     std::cout << std::endl;
     Matrix temp(temp_rows, temp_cols);
+    float tempval;
+    for(int i = 0; i < temp.col(); i ++){
+        for(int j = 0; j < temp.row(); j++){
+            std::cout << "M[" << i << "][" << j << "]: ";
+            std::cin >> tempval;
+            temp.set(tempval, i,j);
+        }
+    }
     return temp;
 }
 
-void Matrix::zero(){
+void Matrix::zero() const{
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             matrix[i][j] = 0;
         }
     }return;
 }
-void Matrix::eye() {
+void Matrix::eye() const{
+    if(cols != rows){ return; }
     for (int i = 0; i < rows; i++) {
         for (int j = 0; j < cols; j++) {
             i == j ? matrix[i][j] = 1 : matrix[i][j] = 0;
         }
     }return;
 }
-int Matrix::row(){
+int Matrix::row() const{
         return rows;
 }
-int Matrix::col(){
+int Matrix::col() const{
         return cols;
 }
-void Matrix::set(float temp, int i, int j){
+void Matrix::set(float temp, int i, int j) const{
         if(i < rows && j < cols && i >= 0 && j >= 0 && exists){
             matrix[i][j] = temp;
         }else if(!exists){
@@ -149,10 +158,10 @@ void Matrix::set(float temp, int i, int j){
             return;
         }
 }
-void Matrix::add(float temp, int i, int j) {
+void Matrix::add(float temp, int i, int j) const{
     matrix[i][j] += temp;
 }
-float Matrix::get(int i, int j){
+float Matrix::get(int i, int j) const{
         if(i < rows && j < cols && i >= 0 && j >= 0 && exists){
             return matrix[i][j];
         }else if(!exists){
@@ -163,6 +172,35 @@ float Matrix::get(int i, int j){
             return 0;
         }
 }
+void Matrix::compile() const{
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                float temp;
+                std::cout << "Add new element[" << i << "][" << j << "]: ";
+                std::cin >> temp;
+                set(temp,i,j);
+                std::cout << std::endl;
+            }
+        }
+}
+void Matrix::show() const{
+        std::cout << std::endl;
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                std::cout << "Matrix[" << i << "][" << j << "]: " << matrix[i][j] << "\t";
+            }std::cout << std::endl << std::endl;     
+        }
+}
+void Matrix::random() const{
+        srand(int(time(0)));
+        for(int i = 0; i < rows; i++){
+            for(int j = 0; j < cols; j++){
+                set(float(rand()%Max),i,j);
+            }
+        }
+}
+
+//non-const object methods
 void Matrix::free(){
         if(exists){
             for(int k = 0; k < rows; k++){
@@ -188,31 +226,4 @@ void Matrix::reAllocate(int r, int c){
             matrix[k] = new float[cols];
         }
         exists = true;
-}
-void Matrix::compile(){
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                float temp;
-                std::cout << "Add new element[" << i << "][" << j << "]: ";
-                std::cin >> temp;
-                set(temp,i,j);
-                std::cout << std::endl;
-            }
-        }
-}
-void Matrix::show(){
-        std::cout << std::endl;
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                std::cout << "Matrix[" << i << "][" << j << "]: " << matrix[i][j] << "\t";
-            }std::cout << std::endl << std::endl;     
-        }
-}
-void Matrix::random(){
-        srand(int(time(0)));
-        for(int i = 0; i < rows; i++){
-            for(int j = 0; j < cols; j++){
-                set(float(rand()%Max),i,j);
-            }
-        }
 }
