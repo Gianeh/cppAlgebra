@@ -1,4 +1,7 @@
 #include "Array.h"
+#include "Matrix.h"
+int Array::counter = 0;
+
 
 //devo capire perchè passando una reference sono in grado di leggere il private ma funziona cosi
 
@@ -12,7 +15,7 @@ Array Array::operator+(const Array &other){
             return temp;
             
             }
-Array Array::operator*(const Array& other) {
+Array Array::operator*(const Array &other) {
             Array temp;
             if (len != other.len) return temp;
             temp.reAllocate(len);
@@ -21,25 +24,42 @@ Array Array::operator*(const Array& other) {
             }
             return temp;
 }
+/*
+//Assumes a row Array
+Matrix Array::operator*(const Matrix &other){
+    Matrix temp;
+    if(len != other.row()) return temp;
+    temp.reAllocate(1, other.col());
+    temp.zero();
+    for(int i = 0; i < other.col(); i++){
+        for(int j = 0; j < other.row(); j++){
+            temp.add(other.get(i,j) * array[j], i, j);
+        }
+    }
+    return temp;
+
+
+}
+*/
 Array& Array::operator++() {
-    for (int i = 0; i < len; i++) {
-        array[i]++;
-    }return *this;
+            for (int i = 0; i < len; i++) {
+                array[i]++;
+            }return *this;
 }
 Array& Array::operator++(int) {
-    for (int i = 0; i < len; i++) {
-        array[i]++;
-    }return *this;
+            for (int i = 0; i < len; i++) {
+                array[i]++;
+            }return *this;
 }
 Array& Array::operator--() {
-    for (int i = 0; i < len; i++) {
-        array[i]--;
-    }return *this;
+            for (int i = 0; i < len; i++) {
+                array[i]--;
+            }return *this;
 }
 Array& Array::operator--(int) {
-    for (int i = 0; i < len; i++) {
-        array[i]--;
-    }return *this;
+            for (int i = 0; i < len; i++) {
+                array[i]--;
+            }return *this;
 }
 
 //Copy constructor
@@ -50,6 +70,7 @@ Array::Array(const Array &other) {
             for (int k = 0; k < len; k++) {
                 array[k] = other.array[k];
             }
+            Array::counter++;
 }
 //Void constructor
 Array::Array(){
@@ -61,6 +82,7 @@ Array::Array(const int l){
             array = new float[l]();
             exists = true;
             len = l;
+            Array::counter++;
         }
 //Destructor (cleans the array* pointer (float))
 Array::~Array(){
@@ -69,9 +91,9 @@ Array::~Array(){
             if(exists) {
                 delete[] array;
                 //std::cout << "Cleaning memory ./." << std::endl << "Done..." << std::endl;
+                Array::counter--;
 
             }//else std::cout << "Already cleaned at RunTime!" << std::endl;
-
         }
 
 //static
@@ -89,6 +111,7 @@ void Array::free(){
                 delete[] array;
                 exists = false;
                 std::cout << "Memory area cleaned!" << std::endl;
+                Array::counter--;
             }
             return;
         }

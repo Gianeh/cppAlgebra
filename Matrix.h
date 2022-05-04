@@ -10,7 +10,12 @@ class Matrix{
         float** matrix;
         int cols, rows;
         bool exists;
+        //static
+        static const int Max = 1000;
     public:
+        //static
+        static int counter;
+
         //Constructors / Destructor
         Matrix(const Matrix &other);
         Matrix();
@@ -36,5 +41,5 @@ class Matrix{
 
         Matrix operator+(const Matrix &other);  //matrix + matrix
         Matrix operator*(const Matrix &other);  //matrix * matrix
-        Matrix operator*(Array &other); //matrix * vector
+        //Matrix operator*(const Array &other); //matrix * vector
 };

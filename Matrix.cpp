@@ -1,6 +1,8 @@
-#define Max 1000
-#include "Matrix.h"
 
+#include "Matrix.h"
+#include "Array.h"
+
+int Matrix::counter = 0;
 
 Matrix Matrix::operator+(const Matrix &other){
     Matrix temp;
@@ -27,6 +29,7 @@ Matrix Matrix::operator+(const Matrix &other){
         return temp;
 }
 
+/*
 //Assumes a column array
 Matrix Matrix::operator*(Array &other){
     Matrix temp;
@@ -40,6 +43,7 @@ Matrix Matrix::operator*(Array &other){
     }
     return temp;
 }
+*/
 
 Matrix Matrix::operator*(const Matrix& other) {
     Matrix temp;
@@ -71,10 +75,12 @@ Matrix::Matrix(const Matrix &other) {
             matrix[i][j] = other.matrix[i][j];
         }
     }
+    Matrix::counter++;
 }
 //void constructor
 Matrix::Matrix(){
     matrix = nullptr;
+    Matrix::counter++;
 };
 //default constructor
 Matrix::Matrix(int r, int c){
@@ -84,6 +90,7 @@ Matrix::Matrix(int r, int c){
         for(int k = 0; k < rows; k++){
             matrix[k] = new float[cols];
         }
+        Matrix::counter++;
 }
 //destructor
 Matrix::~Matrix(){
@@ -94,6 +101,7 @@ Matrix::~Matrix(){
                 delete[] matrix[k];
             } delete[] matrix;
             std::cout << "Done..." << std::endl;
+            Matrix::counter--;
 
        }//else std::cout << "Already cleaned at RunTime!" << std::endl;
 }
@@ -162,11 +170,15 @@ void Matrix::free(){
             }delete[] matrix;
             exists = false;
             std::cout << "Memory area cleaned!" << std::endl;
-        }else return;
+            Matrix::counter--;
+        }else{
+            return;
+        }
 }
 void Matrix::reAllocate(int r, int c){
         if(exists){
             free();
+            Matrix::counter++;
         }
         rows = r;
         cols = c;

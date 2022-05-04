@@ -2,6 +2,7 @@
 #include <iostream>
 #include <random>
 #include <ctime>
+#include "Matrix.h"
 
 class Array{
     private:
@@ -15,6 +16,9 @@ class Array{
         Array();
         Array(const int l);
         ~Array();
+
+        //static variables
+        static int counter;
 
         //static methods
         static Array create();
@@ -33,6 +37,7 @@ class Array{
 
         Array operator+(const Array &other);
         Array operator*(const Array &other);
+        //Matrix operator*(const Matrix &other); matrix * array
         Array& operator++();
         Array& operator++(int);
         Array& operator--();
