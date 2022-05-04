@@ -38,6 +38,7 @@ Matrix Matrix::operator*(Array &other){
             temp.add(matrix[i][j] * other.ptr()[j], i, j);
         }
     }
+    return temp;
 }
 
 Matrix Matrix::operator*(const Matrix& other) {
