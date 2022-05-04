@@ -9,7 +9,7 @@ class Array{
         
         float* array;
         int len;
-        bool exists;
+        bool exists = false;
     public:
         //Constructors / Destructors
         Array(const Array &other);

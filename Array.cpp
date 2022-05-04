@@ -109,8 +109,6 @@ Array Array::create(){
 }
 
 
-
-
 const int Array::length() const{
             if(!exists) return 0;
             return len;
@@ -149,6 +147,7 @@ void Array::compile() const{
             }
         }
 void Array::show() const{
+            if(array == nullptr) return;
             for(int i = 0; i < len; i++){
                 std::cout << "Array[" << i << "]: " << array[i] << std::endl;
             }//std::cout << int(exists) << std::endl; //?

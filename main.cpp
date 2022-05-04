@@ -4,12 +4,17 @@
 
 int main(){
 
+        Matrix A;
+        A.free();
+        //const operators tests
+        /*
         const Array A(5);
         A.compile();
         Array B = A + A;
         B.show();
         Array C = B + B;
         C.show();
+        */
 
         //const tests
         /*
@@ -81,3 +86,4 @@ int main(){
         //B.show();
     return 0;
 }
+//

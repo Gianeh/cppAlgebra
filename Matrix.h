@@ -9,7 +9,7 @@ class Matrix{
     private:
         float** matrix;
         int cols, rows;
-        bool exists;
+        bool exists = false;
         //static
         static const int Max = 1000;
     public:

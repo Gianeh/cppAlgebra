@@ -80,7 +80,6 @@ Matrix::Matrix(const Matrix &other) {
 //void constructor
 Matrix::Matrix(){
     matrix = nullptr;
-    Matrix::counter++;
 };
 //default constructor
 Matrix::Matrix(int r, int c){
@@ -184,6 +183,7 @@ void Matrix::compile() const{
         }
 }
 void Matrix::show() const{
+        if(matrix == nullptr) return;
         std::cout << std::endl;
         for(int i = 0; i < rows; i++){
             for(int j = 0; j < cols; j++){
