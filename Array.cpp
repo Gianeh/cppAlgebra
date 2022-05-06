@@ -157,7 +157,7 @@ float* Array::ptr() const{
 }
 
 
-// handles new dynamic allocation (change in size)
+//handles new dynamic allocation (change in size)
 void Array::reAllocate(int l){
             if(exists){
                 free();
